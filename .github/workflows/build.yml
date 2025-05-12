@@ -1,0 +1,27 @@
+jobs:
+  build-and-test:
+    name: Build & Test on ${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        arch: [x86_64, arm64]
+        include:
+          - arch: x86_64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: eessi/github-action-eessi@v3
+      - name: Test EESSI
+        run: |
+          module load HDF5/1.14.3-gompi-2023b
+          module load CMake/3.27.6-GCCcore-13.2.0
+          export LD_RUN_PATH=$LIBRARY_PATH:$EBROOTGCCCORE/lib64
+          mkdir build
+          cd build
+          cmake ..
+          make -j
+          ctest --output-on-failure --verbose
+        shell: bash
+
