@@ -1,0 +1,27 @@
+name: Build via EasyBuild on x86 and Arm
+on:
+  workflow_dispatch:  # Allows manual triggering
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+# Declare default permissions as read only.
+permissions: read-all
+jobs:
+  minimal_usage:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-24.04-arm
+          - ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - uses: eessi/github-action-eessi@v3
+    - name: Test EESSI
+      run: |
+        module load EESSI-extend
+        eb --software-commit=$GITHUB_SHA easybuild/software-project.eb
+      shell: bash

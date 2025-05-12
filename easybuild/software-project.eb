@@ -1,0 +1,35 @@
+easyblock = 'CMakeMake'
+
+name = 'Software_Project'
+version = '0.0.1'
+versionsuffix = '-%(software_commit)s'
+
+homepage = 'none'
+description = """
+ Simple project that writes in parallel via HDF5
+"""
+
+toolchain = {'name': 'gompi', 'version': '2023b'}
+
+sources = [{
+    'filename': '%(namelower)s-%(software_commit)s.tar.xz',
+    'git_config': {
+        'url': 'https://github.com/ocaisa',
+        'repo_name': 'temp_software_project',
+        'commit': '%(software_commit)s',
+    },
+}]
+
+builddependencies = [
+    ('CMake', '3.27.6'),
+]
+dependencies = [
+    ('HDF5', '1.14.3'),
+]
+
+sanity_check_paths = {
+    'files': ['bin/hello_mpi_hdf5'],
+    'dirs': [],
+}
+
+moduleclass = 'devel'
