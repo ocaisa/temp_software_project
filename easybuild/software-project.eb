@@ -27,6 +27,8 @@ dependencies = [
     ('HDF5', '1.14.3'),
 ]
 
+runtest = True
+
 sanity_check_paths = {
     'files': ['bin/hello_mpi_hdf5'],
     'dirs': [],
