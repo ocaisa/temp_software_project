@@ -16,10 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: eessi/github-action-eessi@v3
-      - name: Test EESSI
+      - name: Test software build and test
         run: |
           module load HDF5/1.14.3-gompi-2023b
           module load CMake/3.27.6-GCCcore-13.2.0
+          export OMPI_MCA_rmaps_base_oversubscribe=1
           export LD_RUN_PATH=$LIBRARY_PATH:$EBROOTGCCCORE/lib64
           mkdir build
           cd build
