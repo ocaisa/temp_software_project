@@ -24,5 +24,6 @@ jobs:
       run: |
         export OMPI_MCA_rmaps_base_oversubscribe=1
         module load EESSI-extend
-        eb --software-commit=$GITHUB_SHA easybuild/software-project.eb
+        unset EASYBUILD_DEBUG
+        eb -l --software-commit=$GITHUB_SHA easybuild/software-project.eb
       shell: bash
