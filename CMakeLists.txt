@@ -29,3 +29,12 @@ add_test(NAME VerifyHDF5Output
 
 # Ensure verification runs only after MPI program
 set_tests_properties(VerifyHDF5Output PROPERTIES DEPENDS RunMPIProgram)
+
+# -------------------------------
+# Installation Instructions
+# -------------------------------
+include(GNUInstallDirs)
+
+# Install binaries
+install(TARGETS hello_mpi_hdf5 verify_hdf5
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
