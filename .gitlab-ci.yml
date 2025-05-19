@@ -1,0 +1,9 @@
+include:
+  - component: $CI_SERVER_FQDN/eessi/gitlab-eessi/eessi@1.0.11
+
+build:
+  stage: build
+  script:
+    - module load EESSI-extend
+    - unset EASYBUILD_DEBUG
+    - eb -l --software-commit $CI_COMMIT_SHA easybuild/software-project.eb
