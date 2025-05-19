@@ -53,7 +53,7 @@ mpirun -np 4 ./hello_mpi_hdf5 my_output_file.h5
 ## Testing
 You can run the built-in CMake tests using:
 ```bash
-ctest
+ctest --output-on-failure --verbose
 ```
 This performs:
 
