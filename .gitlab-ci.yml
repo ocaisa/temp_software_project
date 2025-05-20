@@ -1,14 +1,10 @@
 include:
-  - component: $CI_SERVER_FQDN/eessi/gitlab-eessi/eessi@1.0.11
+  - component: $CI_SERVER_FQDN/eessi/gitlab-eessi/eessi@1.0.12
 
 build:
   stage: build
   script:
     - module load EESSI-extend
     - unset EASYBUILD_DEBUG
-    # Configure OpenMPI so it can run, and as root
-    - export OMPI_ALLOW_RUN_AS_ROOT=1
-    - export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
-    - export OMPI_MCA_rmaps_base_oversubscribe=1
     # Build and test
     - eb -l --software-commit $CI_COMMIT_SHA easybuild/software-project.eb
